@@ -27,11 +27,13 @@ jobs:
           flutter-version: "3.29.2"
 
       - name: Instalar dependencias
+        working-directory: pipsas
         run: |
           flutter pub get
           flutter doctor -v
             
       - name: Construir Flutter Web (con logs detallados)
+        working-directory: pipsas
         run: |
           flutter config --enable-web
           flutter clean
@@ -46,6 +48,7 @@ jobs:
             
       - name: Subir build web a S3
         if: success()
+        working-directory: pipsas
         run: |
           aws s3 sync build/web s3://webflutters3 --delete \
             --cache-control "no-cache, no-store, must-revalidate" \
@@ -78,8 +81,10 @@ jobs:
         with:
           node-version: '18'
       - name: Install dependencies
+        working-directory: backpipsas
         run: npm install
       - name: deploy lambda
+        working-directory: backpipsas
         #run: npx serverless deploy function -f api
-        run: npx serverless sls deploy
+        run: npx serverless deploy
       

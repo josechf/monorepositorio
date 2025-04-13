@@ -50,7 +50,7 @@ jobs:
         if: success()
         working-directory: pipsas
         run: |
-          aws s3 sync build/web s3://webflutters3 --delete \
+          aws s3 sync build/web s3://guardapipsas--delete \
             --cache-control "no-cache, no-store, must-revalidate" \
             --exclude "*" \
             --include "assets/*" \

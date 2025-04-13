@@ -1,11 +1,11 @@
-name: repartidorpipsas
+name: deploy-lambda
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'backpipas/**'
+      - 'backpipsas/**'
 
 jobs:   
   deploy-lambda:

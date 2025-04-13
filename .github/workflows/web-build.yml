@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths: 
-      - 'backpipas/**'
+      - 'pipsas/**'
 
 jobs:
   build-web:

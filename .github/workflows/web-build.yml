@@ -1,9 +1,11 @@
-name: repartidorpipsas
+name: web-build
 
 on:
   push:
     branches:
       - main
+    paths: 
+      - 'backpipas/**'
 
 jobs:
   build-web:
@@ -60,31 +62,3 @@ jobs:
             --include "*.wasm"
       - name: Debug - confirm upload to S3
         run: echo "Upload to S3 completed"
-        
-  deploy-lambda:
-    needs: build-web
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v4.2.2
-
-      - name: configurar aws
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::418272787842:role/awsgithubactions
-          aws-region: us-east-1
-      # lambda
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        working-directory: backpipsas
-        run: npm install
-      - name: deploy lambda
-        working-directory: backpipsas
-        #run: npx serverless deploy function -f api
-        run: npx serverless deploy
-      

@@ -10,5 +10,5 @@ functions:
     handler: index.handler
     events:
       - httpApi:
-          path: /
+          path: /obtener
           method: get
